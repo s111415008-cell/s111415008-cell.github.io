@@ -1,0 +1,25 @@
+/* 表格線條粗細、背景色與RWD設定 */
+.table-wrap {
+  overflow-x: auto;
+}
+.photo-table, table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #f9fafb;
+}
+.photo-table th, .photo-table td, table th, table td {
+  border: 2px solid #bbb;
+  padding: 8px 12px;
+}
+.photo-table th, table th {
+  background: #e3eaf2;
+}
+.photo-table tr:nth-child(even), table tr:nth-child(even) {
+  background: #f3f6fa;
+}
+.photo-table caption, table caption {
+  caption-side: top;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
