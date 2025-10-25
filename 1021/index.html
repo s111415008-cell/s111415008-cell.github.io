@@ -6,123 +6,10 @@
     <title>1021</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <style>
-      /* 雨滴效果樣式 */
-      .rain {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
-        overflow: hidden;
-        height: 100%;
-      }
-
-      .rain-drop {
-        position: absolute;
-        pointer-events: none;
-        z-index: 1;
-        background: radial-gradient(
-          circle at 35% 35%,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.6) 20%,
-          rgba(255, 255, 255, 0.3) 40%,
-          rgba(255, 255, 255, 0.1) 60%,
-          transparent 100%
-        );
-        border-radius: 50%;
-        filter: blur(0.3px);
-        opacity: 0.35;
-      }
-
-      .rain-drop::before {
-        content: '';
-        position: absolute;
-        top: 25%;
-        left: 20%;
-        width: 25%;
-        height: 25%;
-        background: radial-gradient(
-          circle at center,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.5) 50%,
-          transparent 100%
-        );
-        border-radius: 50%;
-        filter: blur(0.2px);
-      }
-
-      @keyframes rain-fall {
-        from {
-          transform: translateY(-200%);
-          opacity: 0;
-        }
-        5% {
-          opacity: 0.35;
-        }
-        95% {
-          opacity: 0.35;
-        }
-        to {
-          transform: translateY(200%);
-          opacity: 0;
-        }
-      }
     .header-effect {
   position: relative;
   overflow: hidden;
 }
-      .rain-drop {
-        position: absolute;
-        pointer-events: none;
-        z-index: 1;
-        background: radial-gradient(
-          circle at 35% 35%,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.6) 20%,
-          rgba(255, 255, 255, 0.3) 40%,
-          rgba(255, 255, 255, 0.1) 60%,
-          transparent 100%
-        );
-        border-radius: 50%;
-        animation: rain-fall 8s linear infinite;
-        filter: blur(0.3px);
-        opacity: 0.35;
-      }
-
-      .rain-drop::before {
-        content: '';
-        position: absolute;
-        top: 25%;
-        left: 20%;
-        width: 25%;
-        height: 25%;
-        background: radial-gradient(
-          circle at center,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.5) 50%,
-          transparent 100%
-        );
-        border-radius: 50%;
-        filter: blur(0.2px);
-      }
-
-      @keyframes rain-fall {
-        0% {
-          transform: translateY(-200%);
-          opacity: 0;
-        }
-        5% {
-          opacity: 0.35;
-        }
-        95% {
-          opacity: 0.35;
-        }
-        100% {
-          transform: translateY(200%);
-          opacity: 0;
-        }
-      }
 .header-effect img {
   display: block;
   width: 100%;
@@ -162,22 +49,25 @@
   );
   border-radius: 50%;
   transform-origin: center;
-  animation: rain-fall cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  animation: rain cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
   filter: blur(0.3px);
   opacity: 0.35;
+  box-shadow: 
+    0 0 2px rgba(255, 255, 255, 0.1),
+    inset 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .drop::before {
   content: '';
   position: absolute;
-    top: 25%;
-    left: 20%;
-    width: 25%;
-    height: 25%;
+  top: 25%;
+  left: 20%;
+  width: 25%;
+  height: 25%;
   background: radial-gradient(
     circle at center,
     rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.5) 50%,
     transparent 100%
   );
   border-radius: 50%;
@@ -187,17 +77,18 @@
 @keyframes rain {
   0% {
     transform: translateY(-200%);
-      transform: translateY(-200%);
+    opacity: 0;
   }
   5% {
-    5% {
-      opacity: 0.35;
+    opacity: 0.35;
+  }
   95% {
-    95% {
-      opacity: 0.35;
+    opacity: 0.35;
+  }
+  100% {
     transform: translateY(200%);
     opacity: 0;
-      transform: translateY(200%);
+  }
 }
 
 .header-effect {
@@ -325,7 +216,7 @@
 <script>
 function createRain() {
   const rain = document.querySelector('.rain');
-  const dropCount = 35;
+  const dropCount = 15; // 減少水滴數量
   
   // 先清除所有現有的水滴
   rain.innerHTML = '';
@@ -334,67 +225,74 @@ function createRain() {
     const drop = document.createElement('div');
     drop.className = 'drop';
     
-    const size = Math.random() * 4 + 2;
-    const duration = Math.random() * 3 + 4;
-    const delay = Math.random() * 10;
+    // 隨機設置水滴的位置、大小和動畫時間
+    const left = Math.random() * 100;
+    const size = Math.random() * 10 + 6; // 更小的水滴：6-16像素
     const duration = Math.random() * 6 + 10; // 更慢的動畫：10-16秒
-      const left = Math.random() * 100;
-      const size = Math.random() * 3 + 2;
-      const duration = Math.random() * 4 + 8;
-      const delay = Math.random() * 10;
-      const rotation = Math.random() * 8 - 4;
+    const delay = Math.random() * 18;
     
-      drop.style.left = left + '%';
-      drop.style.width = size + 'px';
-      drop.style.height = size + 'px';
-      drop.style.transform = 'rotate(' + rotation + 'deg)';
-      drop.style.animation = 'rain-fall ' + duration + 's linear -' + delay + 's infinite';
-  setTimeout(createRain, 4000);
+    // 添加一些隨機的傾斜角度，但範圍更小
+    const rotation = Math.random() * 8 - 4; // -4到4度之間
+    
+    // 給每個水滴一個隨機的寬高比
+    const heightScale = Math.random() * 0.4 + 1.8; // 1.8-2.2之間
+    
+    drop.style.cssText = `
+      left: ${left}%;
+      width: ${size}px;
+      height: ${size * heightScale}px;
+      animation-duration: ${duration}s;
+      animation-delay: -${delay}s;
+      transform: rotate(${rotation}deg);
+    `;
+    
+    rain.appendChild(drop);
+  }
 }
 
-setInterval(createRain, 6000);
+// 當頁面載入完成後創建水滴
 window.addEventListener('load', createRain);
-    
-  window.addEventListener('load', createRain);
-  // 每10秒重新生成一次水滴
-  setInterval(createRain, 10000);
+
+// 定期重新創建水滴，保持效果的自然性
+setInterval(createRain, 10000);
+
+// 初始創建兩次，使效果更豐富
+createRain();
+setTimeout(createRain, 5000);
+</script>
+
+<!-- Page content -->
+<div class="w3-content glass" style="max-width:1100px">
+
+  <!-- About Section -->
+    <div class="w3-row w3-padding-64" id="about">
+      <div class="w3-col m6 w3-padding-large w3-hide-small" >
+        <img src="./w3images/pic2.webp" class="w3-round w3-image w3-opacity-min" alt="Table Setting" style="width:100%; max-width:400px; height:auto;">
+      </div>
+      <div class="w3-col m6 w3-padding-large">
+        <h1 class="w3-center">水邊之夜</h1><br>
+        <h5 class="w3-center">ABO系列神作</h5>
+        <p class="w3-large">故事簡介:<br>
+  金懿玄是一個背負巨額債務、對人生感到絕望的Omega。當他心灰意冷，準備帶著弟弟投海自盡時，被路過的Alpha呂太洲阻止。呂太洲以幫助金懿玄償還債務、提供住處和工作為條件，將他強行帶入自己的生活。然而，這份「幫助」背後隱藏著交換條件，一段複雜、充滿情感張力的關係就此展開。 </p>
+        <p class="w3-large w3-text-grey w3-hide-medium">《水邊之夜》的作者是euja。這部作品是一部韓國漫畫，中文譯者是黃欣儀，平心出版。 </p>
+      </div>
+    </div>
+  
+  <hr>
+  
+  <!-- Character Section -->
+  <div class="w3-row w3-padding-64" id="menu" style="justify-content:center;">
   <h1 class="w3-center" style="width:100%;margin-bottom:32px;font-size:2.2em;letter-spacing:2px;">人物介紹</h1>
   <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
     <!-- Card 1 -->
     <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
       <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-window.addEventListener('load', () => {
-  // 添加關鍵幀動畫
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes rain-fall {
-      0% {
-        transform: translateY(-200%);
-        opacity: 0;
-      }
-      5% {
-        opacity: 0.35;
-      }
-      95% {
-        opacity: 0.35;
-      }
-      100% {
-        transform: translateY(200%);
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-  
-  createRain();
-  setTimeout(createRain, 2000);
-  setTimeout(createRain, 4000);
-});
+        <img src="./w3images/pic11.jpg" alt="呂太洲" style="width:100%;height:100%;object-fit:cover;">
       </div>
-setInterval(createRain, 6000);
+      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂太洲</h2>
       <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">高利貸企業的老闆，笑裡藏刀，行事狠戾。</div>
       <div style="display:flex;gap:12px;margin-bottom:8px;">
-      drop.className = 'rain-drop';
+        <span style="background:#3a506b;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;">Alpha</span>
         <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age <br>27</span>
         <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height <br>193cm</span>
       </div>
