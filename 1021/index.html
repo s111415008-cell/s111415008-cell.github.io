@@ -4,404 +4,695 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1021</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <style>
-    .header-effect {
-  position: relative;
-  overflow: hidden;
+/* ========================================= */
+/* 主題與背景樣式 */
+/* ========================================= */
+body {
+    background: linear-gradient(120deg, #232946 0%, #1a2233 40%, #3a506b 100%);
+    background-attachment: fixed;
+    color: #eaf6ff;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+/* 背景波紋圖案動畫 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: url('https://media.istockphoto.com/id/1144238840/photo/white-water-wave-texture-or-natural-ripple-background.jpg?s=612x612&w=0&k=20&c=KlonPeFesHoUeHjax1gCEhnVFlQHY4kQNwhc03upSqQ=') repeat;
+    opacity: 0.22;
+    mix-blend-mode: lighten;
+    animation: waveMove 12s linear infinite;
+}
+@keyframes waveMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 100px; }
+}
+
+/* Glassmorphism 玻璃擬態效果 */
+.glass {
+    background: rgba(255,255,255,0.08);
+    border-radius: 0.75em;
+    box-shadow: 0 2px 24px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.25) inset;
+    backdrop-filter: blur(4px) contrast(140%) brightness(120%);
+    -webkit-backdrop-filter: blur(4px) contrast(140%) brightness(120%);
+    border: 2.5px solid rgba(255,255,255,0.35);
+    margin-top: 20px;
+    padding: 28px 22px;
+    transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
+}
+
+/* 確保 w3css 元素透明，讓背景可見 */
+.w3-bar, .w3-card, .w3-container, .w3-row, .w3-col, .w3-section {
+    background: transparent !important;
+}
+.w3-text-grey {
+    color: #b0c4de !important;
+}
+
+/* ========================================= */
+/* Header 特效 (圖片模糊、波浪、雨滴) */
+/* ========================================= */
+.header-effect {
+    position: relative;
+    overflow: hidden;
 }
 .header-effect img {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: blur(2px) brightness(0.92);
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: blur(2px) brightness(0.92);
 }
 .header-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(35,41,70,0.55) 0%, rgba(35,41,70,0.15) 60%, rgba(35,41,70,0) 100%);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
-}
-.rain {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  overflow: hidden;
-  height: 100%;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(35,41,70,0.55) 0%, rgba(35,41,70,0.15) 60%, rgba(35,41,70,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
 }
 
-.drop {
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-  background: radial-gradient(
-    circle at 35% 35%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.6) 20%,
-    rgba(255, 255, 255, 0.3) 40%,
-    rgba(255, 255, 255, 0.1) 60%,
-    transparent 100%
-  );
-  border-radius: 50%;
-  transform-origin: center;
-  animation: rain cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-  filter: blur(0.3px);
-  opacity: 0.35;
-  box-shadow: 
-    0 0 2px rgba(255, 255, 255, 0.1),
-    inset 0 0 2px rgba(255, 255, 255, 0.1);
-}
-
-.drop::before {
-  content: '';
-  position: absolute;
-  top: 25%;
-  left: 20%;
-  width: 25%;
-  height: 25%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
-    transparent 100%
-  );
-  border-radius: 50%;
-  filter: blur(0.2px);
-}
-
-@keyframes rain {
-  0% {
-    transform: translateY(-200%);
-    opacity: 0;
-  }
-  5% {
-    opacity: 0.35;
-  }
-  95% {
-    opacity: 0.35;
-  }
-  100% {
-    transform: translateY(200%);
-    opacity: 0;
-  }
-}
-
-.header-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.header-effect::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-}
+/* 波浪效果 */
 .header-wave {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 80px;
-  pointer-events: none;
-  z-index: 2;
-  background: url('https://www.transparenttextures.com/patterns/wavecut.png') repeat-x;
-  opacity: 0.32;
-  animation: headerWaveMove 8s linear infinite;
-  background-size: 400px 80px;
-  mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 80px;
+    pointer-events: none;
+    z-index: 2;
+    background: url('https://www.transparenttextures.com/patterns/wavecut.png') repeat-x;
+    opacity: 0.32;
+    animation: headerWaveMove 8s linear infinite;
+    background-size: 100% 800px;
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
 }
 @keyframes headerWaveMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 400px 0; }
+    0% { background-position: 0 0; }
+    100% { background-position: 400px 0; }
 }
 
-.header-gradient-mask {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 60%;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(35,41,70,0.08) 60%, rgba(35,41,70,0.35) 100%);
-  z-index: 2;
+/* 封面区域容器 */
+        .header-section {
+            position: relative;
+            width: 100%;
+            height: 800px; /* 封面高度 */
+            overflow: hidden; /* 隐藏超出边界的花瓣 */
+            background-color: #d8e5e6; /* 示例背景色，会被图片覆盖 */
+        }
+
+        /* 封面图片 */
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            /* 示例：如果你没有自己的图片，可以使用一个占位图 */
+            background-image: url('https://picsum.photos/1200/500?random=1'); 
+            background-size: cover;
+        }
+
+        /* 花瓣容器 */
+        .petal-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* 花瓣在图片上方 */
+            pointer-events: none; /* 让花瓣不阻碍点击下方的元素 */
+        }
+
+        /* 花瓣基础样式 */
+        .petal {
+            position: absolute;
+            background-color: rgba(255, 192, 203, 0.75); /* 樱花粉，半透明 */
+            border-radius: 50% 10%; /* 模拟花瓣的不规则形状 */
+            /* 尺寸将由 JS 随机设定 */
+            filter: blur(0.4px); /* 轻微模糊，增加真实感 */
+            transform-origin: 50% 50%; /* 旋转中心 */
+            
+            /* 同时应用两个动画 */
+            animation-name: fall, sway;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out; /* 增加飘落的轻微不确定性 */
+            animation-fill-mode: forwards;
+        }
+        
+        /* =======================================================
+         * @keyframes 动画定义
+         * ======================================================= */
+
+        /* 1. 飘落动画：从顶部到底部 */
+        @keyframes fall {
+            0% {
+                transform: translateY(-5%); /* 从容器上方开始 */
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(105%); /* 飘到容器下方 */
+                opacity: 0; /* 飘落到底部时消失 */
+            }
+        }
+
+        /* 2. 摇摆/旋转动画 */
+        @keyframes sway {
+            0% {
+                /* 随机起始旋转，由 JS 设置 */
+                transform: translateX(0px) rotateZ(0deg); 
+            }
+            25% {
+                transform: translateX(15px) rotateZ(45deg);
+            }
+            50% {
+                transform: translateX(-15px) rotateZ(135deg);
+            }
+            75% {
+                transform: translateX(10px) rotateZ(225deg);
+            }
+            100% {
+                transform: translateX(0px) rotateZ(360deg);
+            }
+        }
+/* 雨滴容器 */
+.rain {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    height: 100%;
 }
-      body {
-        background: linear-gradient(120deg, #232946 0%, #1a2233 40%, #3a506b 100%);
-        background-attachment: fixed;
-        color: #eaf6ff;
-        position: relative;
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
-      .glass {
-        background: rgba(255,255,255,0.08);
-        border-radius: 0.75em;
-        box-shadow: 0 2px 24px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.25) inset;
-        backdrop-filter: blur(4px) contrast(140%) brightness(120%);
-        -webkit-backdrop-filter: blur(4px) contrast(140%) brightness(120%);
-        border: 2.5px solid rgba(255,255,255,0.35);
-        margin-top: 20px;
-        padding: 28px 22px;
-        transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
-      }
-      .character-card {
-  transition: box-shadow 0.6s cubic-bezier(.4,1.4,.6,1), border 0.4s, transform 0.6s cubic-bezier(.4,1.4,.6,1), filter 0.4s, background 0.4s;
+
+/* 單個雨滴樣式 */
+/* =================================
+ * 1. 修正后的 .drop 样式
+ * 必须加入 width/height 才能显示
+ * ================================= */
+/* =================================
+ * 1. 调整后的 .drop 样式：雨滴尺寸变大
+ * ================================= */
+.drop {
+    /* **【调整】** 尺寸增大，模拟更大颗的雨滴或水渍 */
+    width: 12px;     
+    height: 32px;    
+
+    /* 定位与行为 */
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 50%;
+    transform-origin: center;
+
+    /* 视觉效果：柔和度与透明度 */
+    opacity: 0.35;
+    filter: blur(0.5px); 
+
+    /* 径向渐变：水滴的高光 (保持优化后的设置) */
+    background: radial-gradient(
+        circle at 35% 35%,
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(255, 255, 255, 0.4) 15%, 
+        transparent 40%
+    );
+
+    /* 阴影效果：增强立体感 */
+    box-shadow: 
+        0 0 2px rgba(255, 255, 255, 0.1),
+        inset 0 0 2px rgba(255, 255, 255, 0.1);
+
+    /* 动画定义 (使用新的短程移动动画) */
+    animation: 
+        rain-movement-short 2s linear infinite, /* 【新】短程移动动画，时长设为 2s */
+        rain-scale 2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;  
+        /* 注意：需要配合 JS 随机设置 animation-delay */
+}
+
+/* =================================
+ * 2. 动画 @keyframes 示例：下滑 10cm
+ * ================================= */
+
+@keyframes rain-movement-short {
+    /* 示例：雨滴从初始位置下滑 10 厘米 */
+    0% {
+        transform: translateY(0);
+        opacity: 0.35;
+    }
+    /* 50% 的时候达到最大不透明度，模拟水滴滑落过程中逐渐清晰 */
+    50% {
+        opacity: 0.5; 
+    }
+    100% {
+        /* **【调整】** 沿 Y 轴向下移动 10 厘米 */
+        transform: translateY(10cm); 
+        opacity: 0; /* 滑到 10cm 处时完全透明消失 */
+    }
+}
+
+@keyframes rain-scale {
+    /* 保持原样，提供轻微的缩放变化 */
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95); 
+    }
+}
+
+
+/* ========================================= */
+/* 人物卡片樣式與動畫 */
+/* ========================================= */
+.character-grid {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.character-card {
+    flex: 1 1 300px;
+    max-width: 340px;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 24px;
+    /* 玻璃卡片動畫設定 */
+    transition: box-shadow 0.6s cubic-bezier(.4,1.4,.6,1), border 0.4s, transform 0.6s cubic-bezier(.4,1.4,.6,1), filter 0.4s, background 0.4s;
 }
 .character-card:hover {
-  box-shadow: 0 0 64px 24px rgba(180,200,255,0.28), 0 0 32px 8px rgba(220,220,230,0.18), 0 4px 32px 0 rgba(31, 38, 135, 0.12);
-  border: 3px solid rgba(220,220,230,0.35);
-  transform: scale(1.04) translateY(-6px);
-  filter: brightness(1.12) blur(1.5px) drop-shadow(0 0 32px rgba(180,200,255,0.18));
-  background: rgba(255,255,255,0.18);
-  animation: gentleWave 1.2s ease-in-out;
+    box-shadow: 0 0 64px 24px rgba(180,200,255,0.28), 0 0 32px 8px rgba(220,220,230,0.18), 0 4px 32px 0 rgba(31, 38, 135, 0.12);
+    border: 3px solid rgba(220,220,230,0.35);
+    transform: scale(1.04) translateY(-6px);
+    filter: brightness(1.12) blur(1.5px) drop-shadow(0 0 32px rgba(180,200,255,0.18));
+    background: rgba(255,255,255,0.18);
+    animation: gentleWave 1.2s ease-in-out;
 }
 @keyframes gentleWave {
-  0% { transform: scale(1) translateY(0); filter: none; }
-  50% { transform: scale(1.06) translateY(-8px); filter: blur(2px) brightness(1.18); }
-  100% { transform: scale(1.04) translateY(-6px); filter: blur(1.5px) brightness(1.12); }
+    0% { transform: scale(1) translateY(0); filter: none; }
+    50% { transform: scale(1.06) translateY(-8px); filter: blur(2px) brightness(1.18); }
+    100% { transform: scale(1.04) translateY(-6px); filter: blur(1.5px) brightness(1.12); }
 }
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        pointer-events: none;
-        z-index: 0;
-        background: url('https://media.istockphoto.com/id/1144238840/photo/white-water-wave-texture-or-natural-ripple-background.jpg?s=612x612&w=0&k=20&c=KlonPeFesHoUeHjax1gCEhnVFlQHY4kQNwhc03upSqQ=') repeat;
-        opacity: 0.22;
-        mix-blend-mode: lighten;
-        animation: waveMove 30s linear infinite;
-      }
-      @keyframes waveMove {
-        0% { background-position: 0 0; }
-        100% { background-position: 200px 100px; }
-      }
-      .w3-text-grey {
-        color: #b0c4de !important;
-      }
-      .w3-bar, .w3-card, .w3-container, .w3-row, .w3-col, .w3-section {
-        background: transparent !important;
-      }
+
+/* 圖片容器 */
+.char-img-container {
+    width: 180px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background: #eaeaea;
+}
+
+/* 標籤容器和樣式 */
+.char-tag-flex {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.char-tag {
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.95em;
+    white-space: nowrap;
+    text-align: center;
+}
+.tag-alpha { background:#3a506b; color:#fff; }
+.tag-other { background:rgba(255,255,255,0.18); color:#232946; }
+
+/* 內文顏色 */
+.char-desc { color:#91a8b9; font-size:1em; text-align:center; margin-bottom:12px; }
+.char-quote { color:#3c4c61; font-size:1em; text-align:center; margin-top:10px; }
+
+/* 點讚按鈕動畫 */
+.zoom-in-out {
+    animation: pulse-zoom 0.3s ease-in-out 1; 
+}
+@keyframes pulse-zoom {
+    0% { transform: scale(1); }
+    50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 0 0 5px rgba(143, 176, 223, 0.4); 
+    }
+    100% { transform: scale(1); }
+}
+/* 确保按钮能容纳水波纹，且水波纹不会溢出 */
+#likeButton {
+    position: relative; 
+    overflow: hidden; /* 隐藏扩散到按钮边界外的波纹 */
+    /* 確保元素位於上層，如果需要的話 */
+    z-index: 1; 
+}
+
+/* 水波纹元素的样式 */
+.ripple {
+    position: absolute;
+    border-radius: 50%; /* 圆形 */
+    background-color: rgba(255, 255, 255, 0.7); /* 白色，半透明 */
+    transform: scale(0); /* 初始为 0 */
+    animation: ripple-grow 0.6s linear; /* 动画持续 0.6s */
+    pointer-events: none; /* 确保它不影响点击事件 */
+}
+
+/* 水波纹的动画：从无到有，从小到大，并淡出 */
+@keyframes ripple-grow {
+    to {
+        transform: scale(4); /* 放大到足够覆盖整个按钮 */
+        opacity: 0; /* 最终完全透明 */
+    }
+}
     </style>
 </head>
 <body>
-   <!-- Navbar (sit on top) -->
+    
 <div class="w3-top">
-  <div class="w3-bar w3-light w3-padding w3-card" style="letter-spacing:4px;">
+  <div class="w3-bar w3-padding w3-card" style="letter-spacing:4px;">
     <a href="#home" class="w3-bar-item w3-button">Low Tide In Twilight</a>
-    <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <a href="#about" class="w3-bar-item w3-button">About</a>
-      <a href="#character" class="w3-bar-item w3-button">Character</a>
+      <a href="#characters" class="w3-bar-item w3-button">Character</a>
       <a href="#merchandise" class="w3-bar-item w3-button">Merchandise</a>
     </div>
   </div>
 </div>
 
-<!-- Header -->
 <header class="w3-display-container w3-content w3-wide header-effect" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="./w3images/pic5.webp" alt="Hamburger Catering" width="100%" height="800">
+  <img class="w3-image" src="./w3images/pic5.webp" alt="Header Image" width="100%" height="800">
   <div class="header-overlay"></div>
   <div class="header-wave"></div>
-  <div class="rain"></div>
-  <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+  <div class="rain"></div> <div class="w3-display-bottomleft w3-padding-large w3-opacity">
     <h1 class="w3-xxlarge">Low Tide In Twilight</h1>
   </div>
+    <div class="petal-container">
+        <div class="petal petal-1"></div>
+        <div class="petal petal-2"></div>
+        <div class="petal petal-3"></div>
+        <div class="petal petal-4"></div>
+        <div class="petal petal-5"></div>
+        <div class="petal petal-6"></div>
+        </div>
+</div>
 </header>
 
-<script>
-function createRain() {
-  const rain = document.querySelector('.rain');
-  const dropCount = 15; // 減少水滴數量
-  
-  // 先清除所有現有的水滴
-  rain.innerHTML = '';
-  
-  for(let i = 0; i < dropCount; i++) {
-    const drop = document.createElement('div');
-    drop.className = 'drop';
-    
-    // 隨機設置水滴的位置、大小和動畫時間
-    const left = Math.random() * 100;
-    const size = Math.random() * 10 + 6; // 更小的水滴：6-16像素
-    const duration = Math.random() * 6 + 10; // 更慢的動畫：10-16秒
-    const delay = Math.random() * 18;
-    
-    // 添加一些隨機的傾斜角度，但範圍更小
-    const rotation = Math.random() * 8 - 4; // -4到4度之間
-    
-    // 給每個水滴一個隨機的寬高比
-    const heightScale = Math.random() * 0.4 + 1.8; // 1-2.2之間
-    
-    drop.style.cssText = `
-      left: ${left}%;
-      width: ${size}px;
-      height: ${size * heightScale}px;
-      animation-duration: ${duration}s;
-      animation-delay: -${delay}s;
-      transform: rotate(${rotation}deg);
-    `;
-    
-    rain.appendChild(drop);
-  }
-}
-
-// 當頁面載入完成後創建水滴
-window.addEventListener('load', createRain);
-
-// 定期重新創建水滴，保持效果的自然性
-setInterval(createRain, 10000);
-
-// 初始創建兩次，使效果更豐富
-createRain();
-setTimeout(createRain, 5000);
-</script>
-
-<!-- Page content -->
 <div class="w3-content glass" style="max-width:1100px">
 
-  <!-- About Section -->
     <div class="w3-row w3-padding-64" id="about">
-      <div class="w3-col m6 w3-padding-large w3-hide-small" >
-        <img src="./w3images/pic2.webp" class="w3-round w3-image w3-opacity-min" alt="Table Setting" style="width:100%; max-width:400px; height:auto;">
-      </div>
-      <div class="w3-col m6 w3-padding-large">
-        <h1 class="w3-center">水邊之夜</h1><br>
-        <h5 class="w3-center">ABO系列神作</h5>
-        <p class="w3-large">故事簡介:<br>
-  金懿玄是一個背負巨額債務、對人生感到絕望的Omega。當他心灰意冷，準備帶著弟弟投海自盡時，被路過的Alpha呂太洲阻止。呂太洲以幫助金懿玄償還債務、提供住處和工作為條件，將他強行帶入自己的生活。然而，這份「幫助」背後隱藏著交換條件，一段複雜、充滿情感張力的關係就此展開。 </p>
-        <p class="w3-large w3-text-grey w3-hide-medium">《水邊之夜》的作者是euja。這部作品是一部韓國漫畫，中文譯者是黃欣儀，平心出版。 </p>
-      </div>
+        <div class="w3-col m6 w3-padding-large w3-hide-small" >
+            <img src="./w3images/pic2.webp" class="w3-round w3-image w3-opacity-min" alt="水邊之夜 封面" style="width:100%; height:auto;">
+        </div>
+        <div class="w3-col m6 w3-padding-large">
+            <h1 class="w3-center w3-xxlarge">水邊之夜</h1><br>
+            <h5 class="w3-center w3-text-dark-grey">ABO系列神作</h5>
+            <p class="w3-large w3-justify">
+                故事簡介:<br>
+                金懿玄是一個背負巨額債務、對人生感到絕望的Omega。當他心灰意冷，準備帶著弟弟投海自盡時，被路過的Alpha呂太洲阻止。呂太洲以幫助金懿玄償還債務、提供住處和工作為條件，將他強行帶入自己的生活。然而，這份「幫助」背後隱藏著交換條件，一段複雜、充滿情感張力的關係就此展開。 
+            </p>
+            <div class="w3-panel w3-border-left w3-light-grey w3-padding w3-text-grey w3-hide-medium">
+                <p class="w3-large">
+                    《水邊之夜》的作者是euja。這部作品是一部韓國漫畫，中文譯者是黃欣儀，平心出版。
+                </p>
+            </div>
+        </div>
+        <div class="w3-col s12 w3-padding-large w3-center w3-hide-large w3-hide-medium">
+            <img src="./w3images/pic2.webp" class="w3-round w3-image w3-opacity-min" alt="水邊之夜 封面" style="width:80%; max-width:300px; height:auto; margin-top: 16px;">
+        </div>
     </div>
-  
-  <hr>
-  
-  <!-- Character Section -->
-  <div class="w3-row w3-padding-64" id="menu" style="justify-content:center;">
-  <h1 class="w3-center" style="width:100%;margin-bottom:32px;font-size:2.2em;letter-spacing:2px;">人物介紹</h1>
-  <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
-    <!-- Card 1 -->
-    <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-        <img src="./w3images/pic11.jpg" alt="呂太洲" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂太洲</h2>
-      <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">高利貸企業的老闆，笑裡藏刀，行事狠戾。</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
-        <span style="background:#3a506b;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;">Alpha</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age <br>27</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height <br>193cm</span>
-      </div>
-      <div style="margin-top:10px;color:#b0c4de;font-size:1em;text-align:center;">我是為了上你，才會故意幫助你。畢竟我也不是什麼好人。</div>
-    </div>
-    <!-- Card 2 -->
-    <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-        <img src="./w3images/pic10.jpg" alt="金懿玄" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">金懿玄</h2>
-      <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">為了還債一天打好幾份工，也因此無暇顧及獨自留在家的弟弟。</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
-        <span style="background:#3a506b;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;">Omega</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age 27</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height 179cm</span>
-      </div>
-      <div style="margin-top:10px;color:#b0c4de;font-size:1em;text-align:center;">不知道問題出在哪裡，我老是有尋死的念頭。</div>
-    </div>
-    <!-- Card 3 -->
-    <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-        <img src="./w3images/pic12.jpg" alt="金懿寜" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">金懿寜</h2>
-      <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">金懿玄的弟弟，乖巧懂事的兄控。</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age 7</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height 121cm</span>
-      </div>
-      <div style="margin-top:10px;color:#b0c4de;font-size:1em;text-align:center;">我一個人也可以，把自己照顧得很好！</div>
-    </div>
-  </div>
-   <!-- Character Section 2-->
-  <div class="w3-row w3-padding-64" id="menu" style="justify-content:center;">
-  <h1 class="w3-center" style="width:100%;margin-bottom:32px;font-size:2.2em;letter-spacing:2px;"></h1>
-  <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
-   <!-- Card 4 -->
-    <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-        <img src="./w3images/pic11.jpg" alt="呂太洲" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂太州的爸爸們</h2>
-      <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">黑道商業聯姻。</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
-        <span style="background:#3a506b;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;">Alpha</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age 27</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height 193cm</span>
-      </div>
-      <div style="margin-top:10px;color:#b0c4de;font-size:1em;text-align:center;">。</div>
-    </div>
-    <!-- Card 5 -->
-    <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-        <img src="./w3images/pic10.jpg" alt="金懿玄" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂海月</h2>
-      <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">呂泰州與金懿璇的小孩</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
-        <span style="background:#3a506b;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;">Omega</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age 27</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height 179cm</span>
-      </div>
-      <div style="margin-top:10px;color:#b0c4de;font-size:1em;text-align:center;">水母沒有腦，但是有毒。</div>
-    </div>
-    <!-- Card 6 -->
-    <div class="glass character-card" style="flex:1 1 300px;max-width:340px;min-width:260px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:180px;height:220px;overflow:hidden;border-radius:12px;margin-bottom:16px;background:#eaeaea;">
-        <img src="./w3images/pic12.jpg" alt="金懿寜" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂元英</h2>
-      <div style="margin-bottom:12px;color:#eaf6ff;font-size:1em;text-align:center;">呂泰州的表姊
-      
-      </div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">age 7</span>
-        <span style="background:rgba(255,255,255,0.18);color:#232946;padding:2px 10px;border-radius:12px;font-size:0.95em;">height 121cm</span>
-      </div>
-      <div style="margin-top:10px;color:#b0c4de;font-size:1em;text-align:center;">我一個人也可以，把自己照顧得很好！</div>
-    </div>
-  </div>
-</div>
+    
+    <hr>
+    
+    <div class="w3-container w3-padding-64" id="characters">
+        <h1 class="w3-center w3-xxlarge" style="letter-spacing:2px;">人物介紹</h1>
+        
+        <div class="character-grid w3-margin-top">
+            
+            <div class="glass character-card">
+                <div class="char-img-container">
+                    <img src="./w3images/pic11.jpg" alt="呂太洲" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂太洲</h2>
+                <div class="char-desc">高利貸企業的老闆，笑裡藏刀，行事狠戾。</div>
+                <div class="char-tag-flex">
+                    <span class="tag-alpha char-tag">Alpha</span>
+                    <span class="tag-other char-tag">age 27</span>
+                    <span class="tag-other char-tag">height 193cm</span>
+                </div>
+                <div class="char-quote">我是為了上你，才會故意幫助你。畢竟我也不是什麼好人。</div>
+            </div>
+            
+            <div class="glass character-card">
+                <div class="char-img-container">
+                    <img src="./w3images/pic10.jpg" alt="金懿玄" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">金懿玄</h2>
+                <div class="char-desc">為了還債一天打好幾份工，也因此無暇顧及獨自留在家的弟弟。</div>
+                <div class="char-tag-flex">
+                    <span class="tag-alpha char-tag">Omega</span>
+                    <span class="tag-other char-tag">age 27</span>
+                    <span class="tag-other char-tag">height 179cm</span>
+                </div>
+                <div class="char-quote">不知道問題出在哪裡，我老是有尋死的念頭。</div>
+            </div>
 
-  <hr>
+            <div class="glass character-card">
+                <div class="char-img-container">
+                    <img src="./w3images/pic12.jpg" alt="金懿寜" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">金懿寜</h2>
+                <div class="char-desc">金懿玄的弟弟，乖巧懂事的兄控。</div>
+                <div class="char-tag-flex">
+                  <span class="tag-alpha char-tag">Alpha</span>
+                    <span class="tag-other char-tag">age 7</span>
+                    <span class="tag-other char-tag">height 121cm</span>
+                </div>
+                <div class="char-quote">我一個人也可以，把自己照顧得很好！</div>
+            </div>
 
-  <!-- merchandise Section -->
-  <div class="w3-container w3-padding-64" id="contact">
-    <h1>merchandise</h1><br>
-    <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
-    <p class="w3-text-blue-grey w3-large"><b>Catering Service, 42nd Living St, 43043 New York, NY</b></p>
-    <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People"></p>
-      <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-light-grey w3-section" type="submit">了解更多</button></p>
-    </form>
-  </div>
+            <div class="glass character-card">
+                <div class="char-img-container">
+                    <img src="./w3images/pic20.webp" alt="呂太洲的爸爸們" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂太洲的爸爸們</h2>
+                <div class="char-desc">黑道商業聯姻。</div>
+                <div class="char-tag-flex">
+                    <span class="tag-alpha char-tag">Alpha</span>
+                    <span class="tag-other char-tag">age unkn</span>
+                    <span class="tag-other char-tag">height unkn</span>
+                </div>
+                <div class="char-quote">開心抱孫子</div>
+            </div>
 
-  <div style="text-align:center; margin: 32px 0;"></div>
-<!-- End page content -->
-</div>
-<!-- Footer -->
+            <div class="glass character-card">
+                <div class="char-img-container">
+                    <img src="./w3images/pic17.jpg" alt="呂海月" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂海月</h2>
+                <div class="char-desc">呂太洲與金懿玄的小孩</div>
+                <div class="char-tag-flex">
+                    <span class="tag-alpha char-tag">Omega</span>
+                    <span class="tag-other char-tag">age 10</span>
+                    <span class="tag-other char-tag">height 130cm</span>
+                </div>
+                <div class="char-quote">水母沒有腦，但是有毒。</div>
+            </div>
+
+            <div class="glass character-card">
+                <div class="char-img-container">
+                    <img src="./w3images/pic18.webp" alt="呂元英" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h2 style="margin:0 0 8px 0;font-size:1.4em;letter-spacing:1px;">呂元英</h2>
+                <div class="char-desc">呂太州的表姊</div>
+                <div class="char-tag-flex">
+                  <span class="tag-alpha char-tag">Alpha</span>
+                    <span class="tag-other char-tag">age 29</span>
+                    <span class="tag-other char-tag">height 180cm</span>
+                </div>
+                <div class="char-quote">幫忙帶小孩</div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <hr>
+
+    <div class="w3-container w3-padding-64" id="merchandise">
+        <h1 class="w3-center">周邊商品及快閃店</h1>
+        <p class="w3-center">各式各樣的精選周邊商品！</p>
+        <br>
+
+        <div class="w3-row-padding w3-center">
+            <div class="w3-col l4 m6 w3-margin-bottom">
+                <div class="w3-card w3-hover-shadow">
+                    <img src="./w3images/pic26.jpg" alt="實體書特裝版" style="width:100%">
+                    <img src="./w3images/pic21.jpeg" alt="實體書特裝版" style="width:100%">
+
+                    <div class="w3-container">
+                        <h3>實體書(特裝版)</h3>
+                        <p class="w3-opacity">書裡藏有小卡 <p>
+                           <p class="w3-opacity">水波紋壓克力牌及卡片數張<p>
+                            <p>真愛粉必須買來收藏一下 嘻嘻</p>
+                           <p>
+                            <button class="w3-button w3-dark-grey w3-section" onclick="window.location.href='https://www.kingstone.com.tw/basic/2019461214985/?srsltid=AfmBOopm7OBHSD4uojgp967OB9_nf6tr5WS1pIo-pmbo9jxcYDVPMBKQ'">了解更多 </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-col l4 m6 w3-margin-bottom">
+                <div class="w3-card w3-hover-shadow">
+                    <img src="./w3images/pic22.jpg" alt="快閃店限量商品" style="width:100%">
+                    <img src="./w3images/pic25.jpg" alt="快閃店限量商品" style="width:100%">
+                    <div class="w3-container">
+                        <h3>快閃店限量商品</h3>
+                        <p class="w3-opacity">我連預約都搶不到呵呵</p>
+                        <p>這些還不是全部喔</p>
+                        <p>
+                            <button class="w3-button w3-dark-grey w3-section" onclick="window.location.href='https://sounova.com/anime/low-tide-in-twilight-taiwan-pop-up-store'">了解更多 </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-col l4 m6 w3-margin-bottom">
+                <div class="w3-card w3-hover-shadow">
+                    <img src="./w3images/pic16.webp" alt="快閃店布置圖 1" style="width:100%"><br>
+                    <img src="./w3images/pic15.webp" alt="快閃店布置圖 2" style="width:100%; margin-top: 8px;"><br>
+                    <img src="./w3images/pic14.webp" alt="快閃店布置圖 3" style="width:100%; margin-top: 8px;">
+                    <div class="w3-container">
+                        <h3>快閃店布置</h3>
+                        <p class="w3-opacity">拍好拍滿!每個角落都不能放過!</p>
+                        <p>冷氣超涼，我真的捨不得離開。</p>
+                        <p>
+                            <button class="w3-button w3-dark-grey w3-section" onclick="window.location.href='https://sounova.com/anime/low-tide-in-twilight-on-the-spot'">了解更多</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w3-center w3-padding-32">
+            <button 
+                id="likeButton" 
+                class="w3-button w3-xlarge w3-padding-large w3-black w3-hover-grey" 
+                onclick="toggleLike()">
+                
+                <i class="fa fa-thumbs-o-up"></i> 為我點讚  &raquo;
+            </button>
+          
+        </div>
+
+    </div>
+    </div>
 <footer class="w3-center w3-transparent w3-padding-32">
-  <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-bottom: 24px;">
-    <img src="./w3images/pic7.jpg" class="w3-round w3-image w3-opacity-min" alt="Character" style="max-width: 1000px; width: 800;">
-  </div>
-  <p>線上看<a href="https://www.bomtoon.tw/detail/night_of_W" title="水邊之夜" target="_blank" class="w3-hover-text-black">水邊之夜</a></p>
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-bottom: 24px;">
+        <img src="./w3images/pic7.jpg" class="w3-round w3-image w3-opacity-min" alt="Character" style="max-width: 800px; width: 800px;">
+    </div>
+    <p>線上看<a href="https://www.bomtoon.tw/detail/night_of_W" title="水邊之夜" target="_blank" class="w3-hover-text-black">水邊之夜</a></p>
 </footer>
+
+<script>
+    // 點讚按鈕邏輯
+let isLiked = false;
+const likeButton = document.getElementById('likeButton');
+
+// 【重要】函式需要接收事件对象 (event)
+function toggleLike(event) {
+    // 1. 先执行点赞状态切换和样式/文字更新
+    // ------------------------------------
+    likeButton.classList.remove('zoom-in-out');
+    isLiked = !isLiked; 
+
+    if (isLiked) {
+        // 點讚状态
+        likeButton.classList.remove('w3-black', 'w3-hover-grey');
+        likeButton.classList.add('w3-light-blue-grey', 'w3-hover-dark-grey'); // 已修正为 w3-light-blue
+        likeButton.innerHTML = '<i class="fa fa-thumbs-up"></i> 已點讚 栓Q &raquo;'; 
+    } else {
+        // 取消点赞状态
+        likeButton.classList.remove('w3-light-blue', 'w3-hover-dark-grey');
+        likeButton.classList.add('w3-black', 'w3-hover-grey'); 
+        likeButton.innerHTML = '<i class="fa fa-thumbs-o-up"></i> 為我點讚 &raquo;';
+    }
+
+    // 2. 水波纹效果 (Water Ripple Effect)
+    // ------------------------------------
+    
+    // a. 创建水波纹元素
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+
+    // b. 计算水波纹的尺寸 (确保它足够大)
+    const diameter = Math.max(likeButton.clientWidth, likeButton.clientHeight);
+    ripple.style.width = ripple.style.height = `${diameter}px`;
+    
+    // c. 计算水波纹的起始位置（在点击位置）
+    // 必须减去按钮左上角的位置 (getBoundingClientRect) 
+    const rect = likeButton.getBoundingClientRect();
+    const x = event.clientX - rect.left; // 鼠标点击相对于按钮左边缘的距离
+    const y = event.clientY - rect.top;  // 鼠标点击相对于按钮上边缘的距离
+
+    // 设置水波纹的中心点
+    // 使用 translate(-50%, -50%) 来确保它居中于点击点
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    // d. 将水波纹添加到按钮中
+    likeButton.appendChild(ripple);
+
+    // e. 动画结束后移除水波纹元素 (很重要，避免 DOM 堆积)
+    ripple.addEventListener('animationend', () => {
+        ripple.remove();
+    });
+
+    // 3. 原始的缩放动画（可保留也可移除）
+    // ------------------------------------
+    void likeButton.offsetWidth; 
+    likeButton.classList.add('zoom-in-out');
+}
+    // 雨滴生成函數
+    function createRain() {
+        const rain = document.querySelector('.rain');
+        const dropCount = 15; // 減少水滴數量
+        
+        // 先清除所有現有的水滴
+        rain.innerHTML = '';
+        
+        for(let i = 0; i < dropCount; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'drop';
+            
+            const left = Math.random() * 100;
+            const size = Math.random() * 10 + 6; // 更小的水滴：6-16像素
+            const duration = Math.random() * 6 + 10; // 更慢的動畫：10-16秒
+            const delay = Math.random() * 18;
+            const rotation = Math.random() * 8 - 4; // -4到4度之間
+            const heightScale = Math.random() * 0.4 + 1.8; 
+            
+            drop.style.cssText = `
+                left: ${left}%;
+                width: ${size}px;
+                height: ${size * heightScale}px;
+                animation-duration: ${duration}s;
+                animation-delay: -${delay}s;
+                transform: rotate(${rotation}deg);
+            `;
+            
+            rain.appendChild(drop);
+        }
+    }
+    
+    // 確保頁面加載完成後調用雨滴生成函數
+    window.onload = createRain;
+
+</script>
+
 </body>
 </html>
