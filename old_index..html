@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #fff7ed 0%, #fef9c3 60%, #fbbf24 100%);
+            animation: bg-move 8s ease-in-out infinite alternate;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', 'Noto Sans TC', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        @keyframes bg-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .futuristic-box {
+            background: rgba(255, 244, 232, 0.95);
+            border-radius: 40px;
+            box-shadow: 0 16px 60px 0px #fbbf24, 0 0 0 6px #fde68a inset, 0 1px 24px 0px #f59e42;
+            transition: box-shadow 0.4s;
+            padding: 48px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #f59e42;
+            font-size: 3.2rem;
+            margin-bottom: 0.5em;
+            text-shadow: 0 4px 24px #fde68a, 0 0 4px #fbbf24, 0 2px 0 #fff7ed;
+            letter-spacing: 4px;
+            animation: h1-jump 1.5s infinite alternate;
+        }
+        @keyframes h1-jump {
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.08) translateY(-8px); }
+        }
+        p {
+            color: #f59e42;
+            font-size: 1.3rem;
+            margin-bottom: 0.5em;
+        }
+        .cute-light {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fbbf24 60%, #fff7ed 100%);
+            top: -30px;
+            right: -30px;
+            box-shadow: 0 0 40px 20px #fde68a;
+            opacity: 0.7;
+            animation: light-flow 2.5s linear infinite alternate, light-color 4s linear infinite;
+        }
+        @keyframes light-flow {
+            0% {
+                box-shadow: 0 0 40px 20px #fde68a, 0 0 0px #fbbf24;
+                filter: blur(0px);
+                top: -30px;
+                right: -30px;
+            }
+            50% {
+                box-shadow: 0 0 60px 30px #fbbf24, 0 0 20px #fde68a;
+                filter: blur(2px);
+                top: 10px;
+                right: 10px;
+            }
+            100% {
+                box-shadow: 0 0 40px 20px #fde68a, 0 0 0px #fbbf24;
+                filter: blur(0px);
+                top: -30px;
+                right: -30px;
+            }
+        }
+        @keyframes light-color {
+            0% {
+                background: radial-gradient(circle, #fbbf24 60%, #fff7ed 100%);
+                box-shadow: 0 0 40px 20px #fde68a;
+            }
+            33% {
+                background: radial-gradient(circle, #fbbf24 40%, #f9a8d4 100%);
+                box-shadow: 0 0 40px 20px #f9a8d4;
+            }
+            66% {
+                background: radial-gradient(circle, #f9a8d4 60%, #fff7ed 100%);
+                box-shadow: 0 0 40px 20px #fbbf24;
+            }
+            100% {
+                background: radial-gradient(circle, #fbbf24 60%, #fff7ed 100%);
+                box-shadow: 0 0 40px 20px #fde68a;
+            }
+        }
+        .cute-line {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            width: 120px;
+            height: 8px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
+            box-shadow: 0 0 16px #fbbf24;
+            opacity: 0.6;
+        }
+        .emoji {
+            display: flex;
+            gap: 0.5em;
+            font-size: 3rem;
+            margin-bottom: 0.5em;
+            filter: drop-shadow(0 0 12px #fde68a);
+        }
+        .emoji span {
+            display: inline-block;
+            animation-duration: 1.2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        .emoji span:nth-child(1) {
+            animation-name: emoji-bounce-1;
+        }
+        .emoji span:nth-child(2) {
+            animation-name: emoji-bounce-2;
+            animation-delay: 0.3s;
+        }
+        .emoji span:nth-child(3) {
+            animation-name: emoji-bounce-3;
+            animation-delay: 0.6s;
+        }
+        @keyframes emoji-bounce-1 {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes emoji-bounce-2 {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes emoji-bounce-3 {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes p-fade {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .bg-cute {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-cute">
+        <span style="position:absolute;left:8vw;top:12vh;font-size:6rem;opacity:0.18;">🐶</span>
+        <span style="position:absolute;left:80vw;top:18vh;font-size:5.5rem;opacity:0.15;">☁️</span>
+        <span style="position:absolute;left:50vw;top:80vh;font-size:4.8rem;opacity:0.13;">💛</span>
+        <span style="position:absolute;left:30vw;top:60vh;font-size:5.2rem;opacity:0.16;">🌟</span>
+        <span style="position:absolute;left:70vw;top:70vh;font-size:5rem;opacity:0.14;">🍩</span>
+        <span style="position:absolute;left:15vw;top:80vh;font-size:4.6rem;opacity:0.12;">🧸</span>
+    </div>
+    <div class="futuristic-box">
+        <div class="cute-light"></div>
+        <div class="cute-line"></div>
+        <div class="emoji"><span>🐶</span><span>☁️</span><span style="color:#FFD700;filter:drop-shadow(0 0 8px #fde68a);">💛</span></div>
+        <h1>歡迎來到首頁嘻嘻</h1>
+        <p style="color:#fbbf24;font-size:1.4rem;font-weight:bold;animation: p-fade 2s infinite alternate;">充滿活力的未來科技感！</p>
+    </div>
+</body>
+</html>
