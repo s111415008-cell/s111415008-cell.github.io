@@ -23,16 +23,17 @@
         font-family: "Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       }
       .intro-card{
-        background: rgba(255,255,255,0.32);
-        border: 4px solid #fff;
-        box-shadow: 0 8px 32px rgba(255,255,255,0.22), 0 0 32px #fff inset, 0 2px 24px #cbe8ff inset;
-        border-radius:32px;
+        /* 與作品集一致的玻璃樣式：更通透、較細的邊框、較圓角 */
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.48);
+        box-shadow: 0 14px 40px rgba(6,18,30,0.05), inset 0 1px 0 rgba(255,255,255,0.04);
+        border-radius:24px;
         padding:40px 24px 32px 24px;
         position:relative;
         overflow:hidden;
-        backdrop-filter: blur(6px) saturate(120%) brightness(1.08);
-        -webkit-backdrop-filter: blur(6px) saturate(120%) brightness(1.08);
-        transition:box-shadow 0.2s;
+        backdrop-filter: blur(12px) saturate(130%);
+        -webkit-backdrop-filter: blur(12px) saturate(130%);
+        transition:box-shadow 0.18s, transform 0.18s;
       }
       .intro-card::after{
         content:'';
@@ -98,34 +99,125 @@
       }
       .accent-title{
         color:#3a2c00;
-        background:linear-gradient(90deg, #ffe5d6 60%, #cbe8ff 100%);
+        /* 透明的圓形標題，協和整體玻璃感 */
+        background: linear-gradient(90deg, rgba(255,229,214,0.14) 60%, rgba(203,232,255,0.08) 100%);
         display:inline-block;
-        padding:10px 22px;
+        padding:8px 20px;
         font-weight:900;
-        font-size:1.6rem;
+        font-size:1.5rem;
         border-radius:999px;
-        box-shadow: 0 8px 24px var(--accent2);
+        border: 1px solid rgba(255,255,255,0.24);
+        backdrop-filter: blur(6px) saturate(120%);
+        -webkit-backdrop-filter: blur(6px) saturate(120%);
+        box-shadow: 0 8px 22px rgba(6,18,30,0.04);
         letter-spacing:2px;
         margin-bottom:8px;
-        text-shadow:0 2px 8px #cbe8ff;
+        text-shadow:0 2px 6px rgba(203,232,255,0.12);
       }
       .intro-text{
         color:#3a2c00;
         line-height:1.85;
         font-size:1.12rem;
-        background:rgba(255,249,214,0.18);
+        /* 更透：降低 alpha，保持輕微漸層增加層次 */
+        background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
         border-radius:16px;
         padding:12px 18px;
         margin-bottom:10px;
-        box-shadow:0 2px 12px rgba(203,232,255,0.10);
+        box-shadow: 0 6px 22px rgba(10,20,30,0.04), inset 0 1px 0 rgba(255,255,255,0.14);
         position:relative;
         z-index:1;
+        backdrop-filter: blur(10px) saturate(140%) contrast(102%);
+        -webkit-backdrop-filter: blur(10px) saturate(140%) contrast(102%);
+        border: 1px solid rgba(255,255,255,0.24);
+        background-clip: padding-box;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      /* subtle lift on hover (optional) */
+      .intro-text:hover{
+        transform: translateY(-4px);
+        box-shadow: 0 18px 48px rgba(10,20,30,0.12), inset 0 1px 0 rgba(255,255,255,0.25);
+      }
+      /* 作品集縮圖樣式 */
+      .portfolio-card{
+        /* stronger iOS-like glass: very translucent, blurred backdrop, soft border & shadow */
+        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+        border: 1px solid rgba(255,255,255,0.22);
+        border-radius:12px;
+        overflow:hidden;
+        position:relative;
+        backdrop-filter: blur(10px) saturate(140%) contrast(98%);
+        -webkit-backdrop-filter: blur(10px) saturate(140%) contrast(98%);
+        box-shadow: 0 8px 28px rgba(6,18,30,0.06), inset 0 1px 0 rgba(255,255,255,0.06);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      /* subtle glossy sheen on the upper part of the card */
+      .portfolio-card::before{
+        content:'';
+        position:absolute;
+        left:0; right:0; top:0;
+        height:44%;
+        background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06));
+        pointer-events:none;
+        mix-blend-mode: overlay;
+        z-index:1;
+      }
+
+      .portfolio-card::after{
+        content:'';
+        position:absolute;
+        left:0; right:0; bottom:0;
+        height:12px;
+        background: linear-gradient(180deg, rgba(0,0,0,0.00), rgba(6,18,30,0.04));
+        pointer-events:none;
+        z-index:1;
+      }
+
+      .portfolio-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 46px rgba(6,18,30,0.10); }
+      .portfolio-card .card-body{ background: transparent; position:relative; z-index:2; }
+      .portfolio-card .card-footer{ background: transparent; position:relative; z-index:2; border-top:1px solid rgba(255,255,255,0.03); }
+      .portfolio-img{ width:100%; height:180px; object-fit:cover; border-radius:8px; display:block; }
+      /* 讓 .content（作品集外層）與自我介紹卡更協和的玻璃樣式 */
+      .content{
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.48);
+        border-radius: 24px;
+        padding: 26px;
+        box-shadow: 0 14px 40px rgba(6,18,30,0.05), inset 0 1px 0 rgba(255,255,255,0.04);
+        backdrop-filter: blur(12px) saturate(130%);
+        -webkit-backdrop-filter: blur(12px) saturate(130%);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .content h2{ margin-top:4px; margin-bottom:10px; }
+      @media (max-width:767.98px){
+        .content{ padding:18px; border-radius:18px; }
+        .portfolio-img{ height:140px; }
       }
       .futuristic-hr{
         height:3px; background:linear-gradient(90deg, rgba(203,232,255,0), var(--accent2), rgba(203,232,255,0));
         border-radius:2px; margin:22px 0;
         box-shadow:0 2px 12px var(--accent2);
       }
+      /* Capybara intro overlay styles */
+      #capybara-overlay{
+        position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+        background: rgba(10,16,22,0.28); z-index:9999; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      }
+      .capybara-card{ position:relative; width:360px; max-width:90%; text-align:center; }
+      .capybara-svg{ width:320px; height:auto; display:block; margin:0 auto 8px; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.12)); }
+      #bills-container{ position:absolute; left:0; right:0; top:6px; bottom:0; pointer-events:none; }
+      .bill{
+        position:absolute; left:50%; transform:translateX(-50%) translateY(0) rotate(0deg);
+        width:56px; height:28px; background:linear-gradient(90deg,#dff7d9,#b6f09a); color:#083; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; box-shadow:0 6px 18px rgba(8,20,10,0.12);
+      }
+      .bill::after{ content:'$'; color:#1a6b2b; font-size:18px; }
+      @keyframes sprayUp {
+        0%{ opacity:0; transform:translateX(var(--dx)) translateY(0) rotate(var(--r)); }
+        8%{ opacity:1; }
+        100%{ opacity:0; transform:translateX(calc(var(--dx) + var(--wx))) translateY(-420px) rotate(calc(var(--r) + 720deg)); }
+      }
+      #capybara-skip{ position:fixed; right:18px; top:18px; z-index:10001; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.24); color:#1b1b1b; padding:8px 12px; border-radius:10px; backdrop-filter: blur(4px); }
       @media (max-width:767.98px){
         .intro-avatar{max-width:120px;margin:auto;display:block}
         .intro-card{padding:18px 6px;}
@@ -133,6 +225,15 @@
     </style>
   </head>
   <body>
+    <!-- Capybara intro overlay (plays on page load, ~5s) -->
+    <div id="capybara-overlay" aria-hidden="true">
+      <div class="capybara-card">
+        <!-- capybara photo (replaces inline SVG) -->
+        <img src="水豚.jpg" class="capybara-svg" alt="水豚" loading="eager" />
+        <div id="bills-container"></div>
+      </div>
+      <button id="capybara-skip" aria-label="skip animation">跳過</button>
+    </div>
     <!--導覽-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -147,6 +248,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-portfolio">作品集</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -228,6 +332,48 @@
           </div>
         </div>
       </section>
+       <!-- 作品集：三個由左到右的小區塊 -->
+  <div class="container">
+  <div class="content mt-4" id="section-portfolio">
+    <h2>🎨 作品集</h2>
+ <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+      <div class="col">
+        <div class="card card-tech h-100 portfolio-card">
+          <a href="https://s111415008-cell.github.io/1021/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="水邊之夜"></a>
+          <div class="card-body">
+            <img src="520.png" alt="水邊之夜 縮圖" class="portfolio-img mb-3" loading="lazy">
+            <h5 class="card-title">水邊之夜</h5>
+            <p class="card-text text-muted">網站設計 / 自訂主題</p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0 text-muted">網站設計</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-tech h-100 portfolio-card">
+          <a href="https://s111415008-cell.github.io/1118/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="數位設計競賽"></a>
+          <div class="card-body">
+            <img src="456.png" alt="數位設計競賽 縮圖" class="portfolio-img mb-3" loading="lazy">
+            <h5 class="card-title">數位設計競賽</h5>
+            <p class="card-text text-muted">網站設計 / 競賽專案</p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0 text-muted">網站設計</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-tech h-100 portfolio-card">
+          <a href="https://s111415008-cell.github.io/1014/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="我的名片"></a>
+          <div class="card-body">
+            <img src="123.png" alt="我的名片 縮圖" class="portfolio-img mb-3" loading="lazy">
+            <h5 class="card-title">我的名片</h5>
+            <p class="card-text text-muted">網站設計 / 個人名片頁</p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0 text-muted">網站設計</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
     </main>
     <!--footer-->
    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -254,6 +400,46 @@
     </svg>
     <div class="container"> <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap"> <svg class="bi" width="30" height="24" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg> </a> 
       <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> 
-        <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/yuqian_0723/" aria-label="Instagram"><svg class="bi" width="24" height="24" aria-hidden="true"><use xlink:href="#Instagram"></use></svg></a></li> <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li> </ul> </footer> </div>
+        <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/yuqian_0723/" aria-label="Instagram"><svg class="bi" width="24" height="24" aria-hidden="true"><use xlink:href="#instagram"></use></svg></a></li> <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li> </ul> </footer> </div>
   </body>
+  <script>
+    // Capybara spray animation: create bills, animate, then hide overlay after ~5s
+    (function(){
+      var overlay = document.getElementById('capybara-overlay');
+      var bills = document.getElementById('bills-container');
+      var skip = document.getElementById('capybara-skip');
+      if(!overlay) return;
+      function rand(min,max){ return Math.random()*(max-min)+min; }
+      // create N bills with random offsets
+      var N = 14;
+      for(var i=0;i<N;i++){
+        var b = document.createElement('div');
+        b.className = 'bill';
+        // random horizontal offset from center (-120px..120px)
+        var dx = Math.round(rand(-140,140)) + 'px';
+        var wx = Math.round(rand(-60,60)) + 'px';
+        var r = Math.round(rand(-30,30)) + 'deg';
+        b.style.setProperty('--dx', dx);
+        b.style.setProperty('--wx', wx);
+        b.style.setProperty('--r', r);
+        // random left to start at different x positions
+        var left = 50 + (Math.random()*40-20);
+        b.style.left = left + '%';
+        // staggered durations
+        var dur = (rand(3.6,4.8)).toFixed(2) + 's';
+        b.style.animation = 'sprayUp ' + dur + ' cubic-bezier(.22,.9,.35,1) forwards';
+        b.style.animationDelay = (rand(0,0.9)).toFixed(2) + 's';
+        bills.appendChild(b);
+      }
+
+      // remove/hide overlay after ~5.2s
+      var totalTimeout = 5200;
+      var t = setTimeout(function(){ overlay.style.display='none'; }, totalTimeout);
+
+      // allow skip
+      if(skip){ skip.addEventListener('click', function(){ clearTimeout(t); overlay.style.display='none'; }); }
+      // a minimal accessibility: press Escape to dismiss
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ clearTimeout(t); overlay.style.display='none'; }});
+    })();
+  </script>
 </html>

@@ -31,20 +31,25 @@
             font-weight: 500;
         }
 
-        /* 內容區塊 - 科技感的漂浮效果 */
+        /* 內容區塊 - 科技感與玻璃質感（更透明） */
         .content {
-            background-color: white;
-            padding: 40px;
-            margin-top: 35px;
-            border-radius: 12px; /* 略大的圓角 */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* 增加陰影深度，模擬漂浮感 */
-            transition: transform 0.3s ease-in-out; /* 增加過渡動畫 */
-            border: 1px solid #e0e0e0;
+          background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+          padding: 40px;
+          margin-top: 35px;
+          border-radius: 12px; /* 略大的圓角 */
+          box-shadow: 0 10px 30px rgba(5,10,20,0.06); /* 輕柔陰影以符合玻璃感 */
+          transition: transform 0.25s ease-in-out, box-shadow 0.25s;
+          border: 1px solid rgba(255,255,255,0.28);
+          backdrop-filter: blur(8px) saturate(140%);
+          -webkit-backdrop-filter: blur(8px) saturate(140%);
+          border-top: 1px solid rgba(255,255,255,0.35);
+          /* 更透明：降低不透明度的視覺重量 */
+          background-clip: padding-box;
         }
 
         .content:hover {
-            transform: translateY(-5px); /* 輕微上浮效果，增加活力 */
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+          transform: translateY(-6px); /* 輕微上浮效果，增加活力 */
+          box-shadow: 0 16px 40px rgba(5,10,20,0.08);
         }
 
         /* 標題樣式 - 使用漸變色 */
@@ -95,6 +100,16 @@
             border-top-right-radius: 10px;
         }
 
+        /* 作品集卡片的玻璃樣式微調 */
+        .portfolio-card{
+          background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+          border: 1px solid rgba(255,255,255,0.22);
+          backdrop-filter: blur(6px) saturate(130%);
+          -webkit-backdrop-filter: blur(6px) saturate(130%);
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .portfolio-card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08);} 
+
         /* 頁尾 */
         .footer-tech {
             background-color: var(--tech-blue-dark);
@@ -123,6 +138,8 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#section-schedule">報名日程</a>
+        </li>
+      
         </li>
          <li class="nav-item">
           <a class="nav-link" href="#section-notes">注意事項</a>
@@ -322,7 +339,7 @@
     <h4 class="text-secondary mt-4 mb-3 fw-bold">📢 著作權使用與推廣</h4>
     <p>主辦單位擁有為推廣活動及教育目的之重製、修改、下載及公開展示等著作財產權權利。著作人格權歸參賽隊伍所有。</p>
   </div>
-
+>
 
 </div> <footer class="footer-tech">
   <div class="container">
