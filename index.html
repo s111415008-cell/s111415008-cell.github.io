@@ -8,6 +8,129 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!--2-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <style>
+      :root{
+        --accent:#ffe5f0; /* 馬卡龍粉 */
+        --accent2:#cbe8ff; /* 馬卡龍藍 */
+        --accent3:#baffea; /* 馬卡龍綠 */
+        --accent4:#fff9d6; /* 馬卡龍黃 */
+        --bg1:linear-gradient(135deg,#cbe8ff 0%, #ffe5f0 60%, #baffea 100%);
+        --glass: rgba(203,232,255,0.12);
+      }
+      body{
+        background: var(--bg1);
+        color:#3a2c00;
+        font-family: "Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+      .intro-card{
+        background: rgba(255,255,255,0.32);
+        border: 4px solid #fff;
+        box-shadow: 0 8px 32px rgba(255,255,255,0.22), 0 0 32px #fff inset, 0 2px 24px #cbe8ff inset;
+        border-radius:32px;
+        padding:40px 24px 32px 24px;
+        position:relative;
+        overflow:hidden;
+        backdrop-filter: blur(6px) saturate(120%) brightness(1.08);
+        -webkit-backdrop-filter: blur(6px) saturate(120%) brightness(1.08);
+        transition:box-shadow 0.2s;
+      }
+      .intro-card::after{
+        content:'';
+        position:absolute;
+        left:18px; top:18px;
+        width:60%; height:12px;
+        background:linear-gradient(90deg,rgba(255,255,255,0.95),rgba(255,255,255,0.3),rgba(255,255,255,0));
+        border-radius:8px;
+        opacity:0.8;
+        z-index:2;
+        pointer-events:none;
+      }
+      .intro-card::before{
+        content:'';
+        position:absolute;
+        right:0; bottom:0;
+        width:80%; height:60px;
+        background:linear-gradient(90deg,rgba(255,255,255,0.18),rgba(203,232,255,0.10),rgba(255,255,255,0.08));
+        border-radius:0 0 32px 32px;
+        opacity:0.8;
+        z-index:1;
+        pointer-events:none;
+      }
+      .intro-card .cute-cloud{
+        position:absolute;
+        right:24px; top:18px;
+        width:70px; height:40px;
+        z-index:2;
+        opacity:0.8;
+      }
+      .intro-avatar{
+        width:100%;
+        max-width:300px;
+        border-radius:50%;
+        border:6px solid var(--accent2);
+        box-shadow: 0 12px 40px rgba(203,232,255,0.22);
+        background: linear-gradient(135deg, #ffe5d6 0%, #cbe8ff 100%);
+        transition:transform 0.2s;
+      }
+      .intro-avatar:hover{
+        transform:scale(1.08) rotate(-6deg);
+        box-shadow: 0 24px 60px var(--accent2);
+      }
+      /* 導覽列馬卡龍漸層 */
+      .navbar{
+        background: linear-gradient(90deg, #cbe8ff 0%, #ffe5f0 60%, #fff9d6 100%) !important;
+        box-shadow: 0 2px 16px rgba(203,232,255,0.12);
+      }
+      .navbar .navbar-brand,
+      .navbar .nav-link,
+      .navbar .navbar-toggler {
+        color: #3a2c00 !important;
+        font-weight: 700;
+        text-shadow: 0 2px 8px #fff9d6;
+      }
+      .navbar .nav-link.active {
+        color: #baffea !important;
+        background: rgba(255,255,255,0.18);
+        border-radius: 8px;
+      }
+      .navbar .nav-link.disabled {
+        color: #bdbdbd !important;
+      }
+      .accent-title{
+        color:#3a2c00;
+        background:linear-gradient(90deg, #ffe5d6 60%, #cbe8ff 100%);
+        display:inline-block;
+        padding:10px 22px;
+        font-weight:900;
+        font-size:1.6rem;
+        border-radius:999px;
+        box-shadow: 0 8px 24px var(--accent2);
+        letter-spacing:2px;
+        margin-bottom:8px;
+        text-shadow:0 2px 8px #cbe8ff;
+      }
+      .intro-text{
+        color:#3a2c00;
+        line-height:1.85;
+        font-size:1.12rem;
+        background:rgba(255,249,214,0.18);
+        border-radius:16px;
+        padding:12px 18px;
+        margin-bottom:10px;
+        box-shadow:0 2px 12px rgba(203,232,255,0.10);
+        position:relative;
+        z-index:1;
+      }
+      .futuristic-hr{
+        height:3px; background:linear-gradient(90deg, rgba(203,232,255,0), var(--accent2), rgba(203,232,255,0));
+        border-radius:2px; margin:22px 0;
+        box-shadow:0 2px 12px var(--accent2);
+      }
+      @media (max-width:767.98px){
+        .intro-avatar{max-width:120px;margin:auto;display:block}
+        .intro-card{padding:18px 6px;}
+      }
+    </style>
   </head>
   <body>
     <!--導覽-->
@@ -74,433 +197,37 @@
 </div>
     <!--主要-->
  <main>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Album example</h1>
-            <p class="lead text-body-secondary">
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don’t simply skip over it entirely.
-            </p>
-            <p>
-              <a href="#" class="btn btn-primary my-2">Main call to action</a>
-              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-            </p>
+      <section class="py-5">
+        <div class="container intro-card">
+          <!-- 可愛雲朵SVG裝飾 -->
+          <svg class="cute-cloud" viewBox="0 0 70 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="20" cy="30" rx="20" ry="10" fill="#fff"/>
+            <ellipse cx="40" cy="20" rx="18" ry="12" fill="#fff"/>
+            <ellipse cx="60" cy="30" rx="10" ry="7" fill="#fff"/>
+            <circle cx="35" cy="25" r="3" fill="#aee2ff"/>
+            <circle cx="50" cy="28" r="2" fill="#aee2ff"/>
+          </svg>
+          <div class="row align-items-center">
+            <div class="col-md-4 text-center mb-4 mb-md-0">
+              <img src="我的照片.jpeg" alt="阿茜的照片" class="intro-avatar img-fluid">
+            </div>
+            <div class="col-md-8">
+              <h2 class="accent-title">哈囉！我是阿茜</h2>
+              <div class="futuristic-hr"></div>
+              <p class="intro-text">
+                來自關西，沒有關係。<br>
+                我今年18歲，來自新竹，一個以米粉和貢丸聞名，但絕不只有這些地方。我現在是個充滿好奇心的大一新鮮人，正在努力解鎖大學生活這個大型線上遊戲。
+              </p>
+              <p class="intro-text">
+                如果說我的生活有什麼主旋律，大概就是「無限追劇模式」和「漫畫腦內劇場」。從熱血沸騰的少年漫到燒腦懸疑的韓劇，再到讓人心動的日劇，我總能在這些虛擬世界裡找到共鳴，並把這些劇情腦補成各種奇奇怪怪的靈感。我特別喜歡觀察劇中角色們的成長弧線，以及漫畫家如何用簡單的線條勾勒出複雜的情感。這些虛擬故事不僅僅是娛樂，更是我理解世界的一扇窗。它們教會我，即使是小小的日常，也能充滿戲劇性。
+              </p>
+              <p class="intro-text">
+                別以為我只會宅在家！現實生活中的我，也像劇中主角一樣，喜歡嘗試新事物，尋找自己的「高光時刻」。我正在努力學習如何將這些天馬行空的靈感，轉化為具體的行動，創造屬於自己的精彩故事。很高興能在這裡與你相遇，希望我的自我介紹能讓你對我有多一點的認識！
+              </p>
+            </div>
           </div>
         </div>
       </section>
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg
-                  aria-label="Placeholder: Thumbnail"
-                  class="bd-placeholder-img card-img-top"
-                  height="225"
-                  preserveAspectRatio="xMidYMid slice"
-                  role="img"
-                  width="100%"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </main>
     <!--footer-->
    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -515,7 +242,7 @@
       <symbol id="facebook" viewBox="0 0 16 16">
     
        <path
-          d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
+          d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.049c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.049H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
         ></path>
       </symbol>
       <symbol id="instagram" viewBox="0 0 16 16">
@@ -528,6 +255,5 @@
     <div class="container"> <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap"> <svg class="bi" width="30" height="24" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg> </a> 
       <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> 
         <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/yuqian_0723/" aria-label="Instagram"><svg class="bi" width="24" height="24" aria-hidden="true"><use xlink:href="#Instagram"></use></svg></a></li> <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li> </ul> </footer> </div>
-  <h1>快樂早八哈哈哈</h1>
   </body>
 </html>
