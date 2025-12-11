@@ -285,8 +285,81 @@
     </style>
   </head>
   <body>
+    <!-- 夢境世界進場頁面 -->
+<div id="dream-intro" style="position:fixed;z-index:99999;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 60% 30%,rgba(80,120,180,0.18) 0%,rgba(30,40,80,0.82) 100%);backdrop-filter:blur(10px) saturate(120%);">
+  <canvas id="dream-stars" width="1920" height="1080" style="position:absolute;inset:0;width:100vw;height:100vh;z-index:1;pointer-events:none;"></canvas>
+  <div style="position:relative;z-index:2;text-align:center;max-width:98vw;">
+    <div style="display:inline-block;padding:3.5rem 3.5rem 3.8rem 3.5rem;background:rgba(255,255,255,0.18);border-radius:44px;backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);box-shadow:0 12px 40px rgba(203,232,255,0.22),0 2px 12px #fff9d6;border:3px solid rgba(255,255,255,0.32);display:flex;flex-direction:column;align-items:center;gap:2.6rem;">
+      <img src="空.jpeg" alt="夢境背景" style="width:300px;height:300px;object-fit:cover;object-position:center;border-radius:38px;box-shadow:0 4px 32px #baffea,0 1px 0 #fff9d6,0 0 40px #cbe8ff;filter:brightness(0.92) saturate(120%) blur(0.5px);margin-bottom:1.6rem;border:2px solid rgba(255,255,255,0.32);background:rgba(255,255,255,0.12);">
+      <h1 style="font-size:2.3rem;color:#fff;text-shadow:0 4px 32px #baffea,0 1px 0 #fff9d6,0 0 40px #cbe8ff;font-weight:900;letter-spacing:0.18em;margin-bottom:1.6rem;">歡迎來到阿茜的夢境世界</h1>
+      <button id="enter-dream-btn" style="padding:20px 56px;font-size:1.5rem;border-radius:32px;border:none;background:linear-gradient(90deg,#cbe8ff 0%,#ffe5f0 100%);color:#3a2c00;font-weight:700;box-shadow:0 8px 32px rgba(203,232,255,0.18);transition:transform 0.18s,box-shadow 0.18s;cursor:pointer;backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%);margin-top:0.7rem;">進入夢境</button>
+    </div>
+    <div class="dreamy-bubbles" style="position:absolute;left:50%;top:100%;transform:translate(-50%,-40%);width:420px;height:120px;pointer-events:none;z-index:1;">
+      <svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="38" fill="#ffe5f0" opacity="0.22"/>
+        <circle cx="120" cy="40" r="22" fill="#cbe8ff" opacity="0.18"/>
+        <circle cx="200" cy="80" r="32" fill="#baffea" opacity="0.16"/>
+        <circle cx="270" cy="50" r="18" fill="#fff9d6" opacity="0.19"/>
+        <circle cx="340" cy="90" r="28" fill="#ffe5f0" opacity="0.21"/>
+        <circle cx="390" cy="38" r="16" fill="#cbe8ff" opacity="0.15"/>
+      </svg>
+    </div>
+  </div>
+</div>
+<script>
+  // 夢境星點效果
+  (function(){
+    var canvas = document.getElementById('dream-stars');
+    if(canvas){
+      var ctx = canvas.getContext('2d');
+      var w = canvas.width = window.innerWidth;
+      var h = canvas.height = window.innerHeight;
+      var stars = [];
+      for(var i=0;i<80;i++){
+        stars.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: Math.random()*1.2+0.6,
+          o: Math.random()*0.5+0.3
+        });
+      }
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        for(var i=0;i<stars.length;i++){
+          var s = stars[i];
+          ctx.beginPath();
+          ctx.arc(s.x,s.y,s.r,0,2*Math.PI);
+          ctx.fillStyle = 'rgba(255,255,255,'+s.o+')';
+          ctx.shadowColor = '#baffea';
+          ctx.shadowBlur = 8;
+          ctx.fill();
+        }
+      }
+      draw();
+      window.addEventListener('resize',function(){
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        draw();
+      });
+    }
+  })();
+  document.addEventListener('DOMContentLoaded',function(){
+    var btn = document.getElementById('enter-dream-btn');
+    var intro = document.getElementById('dream-intro');
+    var capybara = document.getElementById('capybara-overlay');
+    if(btn && intro){
+      btn.addEventListener('click',function(){ 
+        intro.style.display='none';
+        if(capybara){
+          capybara.style.display='flex';
+          setTimeout(function(){ capybara.style.display='none'; }, 5200);
+        }
+      });
+    }
+  });
+</script>
     <!-- Capybara intro overlay (plays on page load, ~5s) -->
-    <div id="capybara-overlay" aria-hidden="true">
+    <div id="capybara-overlay" aria-hidden="true" style="display:none;">
       <div class="capybara-card">
         <!-- capybara photo (replaces inline SVG) -->
         <img src="水豚.png" class="capybara-svg" alt="水豚" loading="eager" />
@@ -297,7 +370,7 @@
     <!--導覽-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">阿茜的網站</a>
+    <a class="navbar-brand" href="#dream-intro">阿茜的網站</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -312,13 +385,10 @@
         <li class="nav-item">
           <a class="nav-link" href="#section-portfolio">作品集</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link " href="#Footer-contact" role="button" aria-expanded="false">
-            聯繫方式
-          </a>
-        
-    
-    
+        <li class="nav-item">
+          <a class="nav-link" href="#footer-contact">聯繫方式</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
@@ -523,7 +593,7 @@
       </symbol>
     </svg>
     <div class="container"id="footer-contact"> <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap"> <svg class="bi" width="30" height="24" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg> </a> 
-      <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> 
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2025 </span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> 
         <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/yuqian_0723/" aria-label="Instagram"><svg class="bi" width="24" height="24" aria-hidden="true"><use xlink:href="#instagram"></use></svg></a></li> <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li> </ul> </footer> </div>
 </body>
 <script>
