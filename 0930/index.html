@@ -2,60 +2,146 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>0930-網站設計與賞析</title>
+  <title>網站設計與賞析 - 唐詩</title>
   <style>
+    /* 全域設定 */
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #dfddec;
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+      /* 背景色調整為更柔和的淺紫色 */
+      background: #f4f2f7; 
       margin: 0;
-      padding: 40px;
-      color: #553f6d;
+      padding: 0;
+      color: #3f3f6d;
+      display: flex; /* 使用 Flexbox 進行中心對齊 */
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh; /* 確保內容至少佔滿整個視窗高度 */
     }
+
+    /* 容器設定 */
+    .container {
+        width: 90%;
+        max-width: 900px; /* 限制內容最大寬度 */
+        padding: 40px 20px;
+        box-sizing: border-box;
+    }
+
+    /* 標題設定 */
     h1 {
-      color: #7d689f;
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
+      color: #6a4c93; /* 更鮮明的紫色 */
+      font-size: 3em;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #6a4c93;
+      text-align: center;
     }
+    
+    /* 詩歌段落設定 */
+    .poem-section {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #ffffff; /* 白色背景突顯內容 */
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 柔和的陰影 */
+    }
+
+    /* 詩歌內容文字 */
     p {
       font-size: 1.2em;
-      background: #f1eaf6;
-      padding: 16px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(222, 117, 231, 0.05);
-      max-width: 600px;
-    }
-    table {
-      margin: 24px 0;
-      border-collapse: collapse;
-      width: 400px;
-    }
-    td {
-      border: 1px solid #553f6d;
-      padding: 8px;
+      line-height: 1.8;
+      color: #553f6d;
+      margin: 10px 0;
       text-align: center;
+    }
+
+    /* 表格設定 */
+    table {
+      margin: 30px auto; /* 居中 */
+      border-collapse: separate; /* 為了圓角和間距 */
+      border-spacing: 0;
+      width: 100%;
+      max-width: 700px;
+      border-radius: 12px;
+      overflow: hidden; /* 確保圓角效果適用於邊框 */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 表格儲存格 */
+    td {
+      border: none; /* 移除內建邊框 */
+      padding: 20px;
+      text-align: center;
+      background: #fff;
+      vertical-align: middle;
+      transition: background 0.3s ease; /* 新增背景過渡效果 */
+    }
+
+    /* 表格懸停效果 */
+    tr:hover td {
+        background: #e9e5f5; /* 懸停時變色 */
+    }
+
+    /* 圖片儲存格 */
+    td img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px; /* 圖片圓角 */
+      transition: transform 0.3s ease;
+    }
+    
+    /* 圖片懸停放大效果 */
+    td:hover img {
+        transform: scale(1.03);
+    }
+    
+    /* 作者資訊段落 */
+    .author-info {
+        font-size: 1.1em;
+        padding: 15px 30px;
+        background: #d4c0e6; /* 顯眼的底部背景 */
+        color: #3f3f6d;
+        border-radius: 8px;
+        max-width: 400px;
+        margin: 40px auto 0; /* 居中並留出空間 */
+        text-align: center;
+        border: 2px solid #553f6d;
     }
   </style>
 </head>
 <body>
-    <h1>唐詩三百首</h1>
-     王維 《相思》<br><br> 紅豆生南國，春來發幾枝？<br>
-     願君多采擷，此物最相思。
-  <table border="1">
-    <tr>
-      <td>王維 《相思》<br><br> 紅豆生南國，春來發幾枝？<br><br>
-     願君多采擷，此物最相思。</td>
-      <td><img src="pic1.jpg" alt="Italian Trulli"></td>
-    </tr>
-     王維 《相思》<br><br> 紅豆生南國，春來發幾枝？<br>
-     願君多采擷，此物最相思。
-  <table border="1">
-    <tr>
-      <td>李白 《玉階怨》<br><br> 玉階生白露，夜久侵羅襪。<br><br>
-卻下水晶簾，玲瓏望秋月。</td>
-      <td><img src="pic3.jpg" alt="Italian Trulli"></td>
-    </tr>
-  </table>
-  <p>這是阿茜的網站</p>
+  <div class="container">
+    <h1>唐詩三百首 🏮</h1>
+    
+    <div class="poem-section">
+        <h2>王維 《相思》</h2>
+        <p>紅豆生南國，春來發幾枝？</p>
+        <p>願君多采擷，此物最相思。</p>
+    </div>
+
+    <table>
+      <tr>
+        <td>
+          <h3>李白 《玉階怨》</h3>
+          <p>玉階生白露，夜久侵羅襪。</p>
+          <p>卻下水晶簾，玲瓏望秋月。</p>
+        </td>
+        <td><img src="pic3.jpg" alt="李白 玉階怨 意境圖"></td>
+      </tr>
+      <tr>
+        <td>
+          <h3>王維 《相思》</h3>
+          <p>紅豆生南國，春來發幾枝？</p>
+          <p>願君多采擷，此物最相思。</p>
+        </td>
+        <td><img src="pic1.jpg" alt="王維 相思 意境圖"></td>
+      </tr>
+    </table>
+
+    <div class="author-info">
+      這是阿茜的網站 💜
+    </div>
+  </div>
 </body>
 </html>
-
