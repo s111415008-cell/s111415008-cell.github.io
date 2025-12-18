@@ -282,6 +282,49 @@
         transform: translateY(-6px);
         box-shadow: 0 18px 46px rgba(6,18,30,0.10);
       }
+
+     /* 修改後的輪播容器樣式 */
+.artwork-container {
+  width: 100%;
+  height: 500px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 移除 #1a1a1a，改用與你網頁一致的半透明玻璃感或直接透明 */
+  background: rgba(255, 255, 255, 0.5); 
+  border-radius: 15px;
+  backdrop-filter: blur(5px); /* 加入微磨砂感 */
+}
+
+/* 確保圖片外框也沒有背景色 */
+.carousel-inner {
+  background-color: transparent !important;
+}
+
+/* 核心：完整展示圖片且不裁切 */
+.artwork-display {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* 圖片完整顯示 */
+}
+
+/* 加快切換時的滑動過渡速度 */
+.carousel-item {
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-caption {
+  /* 改用淺色的馬卡龍藍或粉色背景，並把文字調深 */
+  background: transparent; 
+  color: #3a2c00; 
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.carousel-caption h5 {
+  font-weight: 700;
+  color: #3a2c00;
+}
     </style>
   </head>
   <body>
@@ -367,6 +410,7 @@
       </div>
       <button id="capybara-skip" aria-label="skip animation">跳過</button>
     </div>
+   
     <!--導覽-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -482,114 +526,201 @@
   </div>
 </div>
     <!--主要-->
- <main>
-      <section class="py-5">
-        <div class="container intro-card" id="intro-card">
-          <!-- 可愛雲朵SVG裝飾 -->
-          <svg class="cute-cloud" viewBox="0 0 70 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="20" cy="30" rx="20" ry="10" fill="#fff"/>
-            <ellipse cx="40" cy="20" rx="18" ry="12" fill="#fff"/>
-            <ellipse cx="60" cy="30" rx="10" ry="7" fill="#fff"/>
-            <circle cx="35" cy="25" r="3" fill="#aee2ff"/>
-            <circle cx="50" cy="28" r="2" fill="#aee2ff"/>
-          </svg>
-          <div class="row align-items-center">
-            <div class="col-md-4 text-center mb-4 mb-md-0">
-              <img src="我的照片.jpeg" alt="阿茜的照片" class="intro-avatar img-fluid">
-            </div>
-            <div class="col-md-8">
-              <h2 class="accent-title">哈囉！我是阿茜</h2>
-              <div class="futuristic-hr"></div>
-              <p class="intro-text">
-                來自關西，沒有關係。<br>
-                我今年18歲，來自新竹，一個以米粉和貢丸聞名，但絕不只有這些地方。我現在是個充滿好奇心的大一新鮮人，正在努力解鎖大學生活這個大型線上遊戲。
-              </p>
-              <p class="intro-text">
-                如果說我的生活有什麼主旋律，大概就是「無限追劇模式」和「漫畫腦內劇場」。從熱血沸騰的少年漫到燒腦懸疑的韓劇，再到讓人心動的日劇，我總能在這些虛擬世界裡找到共鳴，並把這些劇情腦補成各種奇奇怪怪的靈感。我特別喜歡觀察劇中角色們的成長弧線，以及漫畫家如何用簡單的線條勾勒出複雜的情感。這些虛擬故事不僅僅是娛樂，更是我理解世界的一扇窗。它們教會我，即使是小小的日常，也能充滿戲劇性。
-              </p>
-              <p class="intro-text">
-                別以為我只會宅在家！現實生活中的我，也像劇中主角一樣，喜歡嘗試新事物，尋找自己的「高光時刻」。我正在努力學習如何將這些天馬行空的靈感，轉化為具體的行動，創造屬於自己的精彩故事。很高興能在這裡與你相遇，希望我的自我介紹能讓你對我有多一點的認識！
-              </p>
-            </div>
-          </div>
+<main>
+  <section class="py-5">
+    <div class="container intro-card" id="intro-card">
+      <svg class="cute-cloud" viewBox="0 0 70 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="30" rx="20" ry="10" fill="#fff" />
+        <ellipse cx="40" cy="20" rx="18" ry="12" fill="#fff" />
+        <ellipse cx="60" cy="30" rx="10" ry="7" fill="#fff" />
+        <circle cx="35" cy="25" r="3" fill="#aee2ff" />
+        <circle cx="50" cy="28" r="2" fill="#aee2ff" />
+      </svg>
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center mb-4 mb-md-0">
+          <img src="我的照片.jpeg" alt="阿茜的照片" class="intro-avatar img-fluid">
         </div>
-      </section>
-      <!-- 夢幻泡泡分隔線 -->
-<div class="bubble-divider my-4" aria-hidden="true">
-  <svg width="100%" height="60" viewBox="0 0 600 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="60" cy="30" rx="28" ry="14" fill="#ffe5f0" opacity="0.38"/>
-    <ellipse cx="160" cy="18" rx="18" ry="9" fill="#cbe8ff" opacity="0.32"/>
-    <ellipse cx="260" cy="38" rx="22" ry="11" fill="#baffea" opacity="0.28"/>
-    <ellipse cx="340" cy="22" rx="14" ry="7" fill="#fff9d6" opacity="0.32"/>
-    <ellipse cx="420" cy="40" rx="26" ry="13" fill="#ffe5f0" opacity="0.36"/>
-    <ellipse cx="520" cy="16" rx="16" ry="8" fill="#cbe8ff" opacity="0.30"/>
-    <ellipse cx="580" cy="32" rx="12" ry="6" fill="#baffea" opacity="0.26"/>
-  </svg>
-</div>
-       <!-- 作品集：三個由左到右的小區塊 -->
-  <div class="container">
-  <div class="content mt-4" id="section-portfolio">
-    <h2> 作品集</h2>
- <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
-      <div class="col">
-        <div class="card card-tech h-100 portfolio-card">
-          <div class="card-body position-relative">
-            <a href="https://s111415008-cell.github.io/0930/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="0930 小網站"></a>
-            <img src="0930/pic2.png" alt="0930 縮圖" class="portfolio-img mb-3" loading="lazy">
-            <h5 class="card-title">唐詩三百首</h5>
-            <p class="card-text text-muted">網站設計 / 表格練習</p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 text-muted">0930</div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-tech h-100 portfolio-card">
-          <div class="card-body position-relative">
-            <a href="https://s111415008-cell.github.io/1007/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="1007 小網站"></a>
-            <img src="1007/pic1.jpg" alt="1007 縮圖" class="portfolio-img mb-3" loading="lazy">
-            <h5 class="card-title">風景</h5>
-            <p class="card-text text-muted">網站設計 / 表格練習</p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 text-muted">1007</div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-tech h-100 portfolio-card">
-          <div class="card-body position-relative">
-            <a href="https://s111415008-cell.github.io/1014/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="我的名片"></a>
-            <img src="123.png" alt="我的名片 縮圖" class="portfolio-img mb-3" loading="lazy">
-            <h5 class="card-title">我的名片</h5>
-            <p class="card-text text-muted">網站設計 / 個人名片頁</p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 text-muted">1014</div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-tech h-100 portfolio-card">
-          <div class="card-body position-relative">
-            <a href="https://s111415008-cell.github.io/1021/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="水邊之夜"></a>
-            <img src="520.png" alt="水邊之夜 縮圖" class="portfolio-img mb-3" loading="lazy">
-            <h5 class="card-title">水邊之夜</h5>
-            <p class="card-text text-muted">網站設計 / 自訂主題</p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 text-muted">1021</div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-tech h-100 portfolio-card">
-          <div class="card-body position-relative">
-            <a href="https://s111415008-cell.github.io/1118/" target="_blank" rel="noopener noreferrer" class="stretched-link" aria-label="數位設計競賽"></a>
-            <img src="456.png" alt="數位設計競賽 縮圖" class="portfolio-img mb-3" loading="lazy">
-            <h5 class="card-title">數位設計競賽</h5>
-            <p class="card-text text-muted">網站設計 / 競賽專案</p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 text-muted">1118</div>
+        <div class="col-md-8">
+          <h2 class="accent-title">哈囉！我是阿茜</h2>
+          <div class="futuristic-hr"></div>
+          <p class="intro-text">來自關西，沒有關係。<br>今年18歲，來自新竹，一個以米粉和貢丸聞名，但絕不只有這些地方。我現在是個充滿好奇心的大一新鮮人，正在努力解鎖大學生活這個大型線上遊戲。
+)</p>
+          <p class="intro-text">如果說我的生活有什麼主旋律，大概就是「無限追劇模式」和「漫畫腦內劇場」。從熱血沸騰的少年漫到燒腦懸疑的韓劇，再到讓人心動的日劇，我總能在這些虛擬世界裡找到共鳴，並把這些劇情腦補成各種奇奇怪怪的靈感。
+</p>
+          <p class="intro-text">我特別喜歡觀察劇中角色們的成長弧線，以及漫畫家如何用簡單的線條勾勒出複雜的情感。這些虛擬故事不僅僅是娛樂，更是我理解世界的一扇窗。它們教會我，即使是小小的日常，也能充滿戲劇性。
+</p>別以為我只會宅在家！現實生活中的我，也像劇中主角一樣，喜歡嘗試新事物，尋找自己的「高光時刻」。我正在努力學習如何將這些天馬行空的靈感，轉化為具體的行動，創造屬於自己的精彩故事。
+很高興能在這裡與你相遇，希望我的自我介紹能讓你對我有多一點的認識！
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <div class="bubble-divider my-4" aria-hidden="true">
+    <svg width="100%" height="60" viewBox="0 0 600 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="60" cy="30" rx="28" ry="14" fill="#ffe5f0" opacity="0.38" />
+      <ellipse cx="160" cy="18" rx="18" ry="9" fill="#cbe8ff" opacity="0.32" />
+      <ellipse cx="260" cy="38" rx="22" ry="11" fill="#baffea" opacity="0.28" />
+      <ellipse cx="340" cy="22" rx="14" ry="7" fill="#fff9d6" opacity="0.32" />
+      <ellipse cx="420" cy="40" rx="26" ry="13" fill="#ffe5f0" opacity="0.36" />
+    </svg>
   </div>
 
+  <div class="container mb-5">
+    
+    <div class="content mb-5" id="section-portfolio">
+      <h2 class="mb-4">作品集 (網站設計)</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card card-tech h-100 portfolio-card">
+            <div class="card-body position-relative">
+              <a href="https://s111415008-cell.github.io/0930/" target="_blank" rel="noopener" class="stretched-link"></a>
+              <img src="0930/pic2.png" alt="0930" class="portfolio-img mb-3">
+              <h5 class="card-title">唐詩三百首</h5>
+              <p class="card-text text-muted">網站設計 / 表格練習</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 text-muted">0930</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-tech h-100 portfolio-card">
+            <div class="card-body position-relative">
+              <a href="https://s111415008-cell.github.io/1007/" target="_blank" rel="noopener" class="stretched-link"></a>
+              <img src="1007/pic1.jpg" alt="1007" class="portfolio-img mb-3">
+              <h5 class="card-title">風景</h5>
+              <p class="card-text text-muted">網站設計 / 表格練習</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 text-muted">1007</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-tech h-100 portfolio-card">
+            <div class="card-body position-relative">
+              <a href="https://s111415008-cell.github.io/1014/" target="_blank" rel="noopener" class="stretched-link"></a>
+              <img src="123.png" alt="1014" class="portfolio-img mb-3">
+              <h5 class="card-title">我的名片</h5>
+              <p class="card-text text-muted">網站設計 / 個人名片</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 text-muted">1014</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-tech h-100 portfolio-card">
+            <div class="card-body position-relative">
+              <a href="https://s111415008-cell.github.io/1021/" target="_blank" rel="noopener" class="stretched-link"></a>
+              <img src="520.png" alt="1021" class="portfolio-img mb-3">
+              <h5 class="card-title">水邊之夜</h5>
+              <p class="card-text text-muted">網站設計 / 自訂主題</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 text-muted">1021</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-tech h-100 portfolio-card">
+            <div class="card-body position-relative">
+              <a href="https://s111415008-cell.github.io/1104/" target="_blank" rel="noopener" class="stretched-link"></a>
+              <img src="789.png" alt="1104" class="portfolio-img mb-3">
+              <h5 class="card-title">與AI協作</h5>
+              <p class="card-text text-muted">網站設計 / 網站首頁</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 text-muted">1104</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card card-tech h-100 portfolio-card">
+            <div class="card-body position-relative">
+              <a href="https://s111415008-cell.github.io/1118/" target="_blank" rel="noopener" class="stretched-link"></a>
+              <img src="456.png" alt="1118" class="portfolio-img mb-3">
+              <h5 class="card-title">數位設計競賽</h5>
+              <p class="card-text text-muted">網站設計 / 競賽專案</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 text-muted">1118</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content" id="section-artworks">
+      <h2 class="mb-4">電繪作品</h2>
+      <div id="artCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="2"></button>
+          <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="3"></button>
+          <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="4"></button>
+          <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="5"></button>
+        </div>
+
+        <div class="carousel-inner shadow-sm rounded ">
+          <div class="carousel-item active">
+            <div class="artwork-container">
+              <img src="空.jpeg" class="artwork-display" alt="空">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                <h5>空</h5>
+                <p>電繪創作 / 夢境系列</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="artwork-container">
+              <img src="粉.jpeg" class="artwork-display" alt="弦月寄思">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                <h5>弦月寄思</h5>
+                <p>電繪創作 / 夢境系列</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="artwork-container">
+              <img src="紫.jpeg" class="artwork-display" alt="星瀑">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                <h5>星瀑</h5>
+                <p>電繪創作 / 夢境系列</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="artwork-container">
+              <img src="綠.jpeg" class="artwork-display" alt="幽翠">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                <h5>幽翠</h5>
+                <p>電繪創作 / 夢境系列</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="artwork-container">
+              <img src="藍.jpeg" class="artwork-display" alt="深息">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                <h5>深息</h5>
+                <p>電繪創作 / 夢境系列</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="artwork-container">
+              <img src="蝴蝶.jpeg" class="artwork-display" alt="羽落">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                <h5>羽落</h5>
+                <p>電繪創作 / 夢境系列</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#artCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#artCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div> 
+
+   
+
+   
     </main>
     <!--footer-->
    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
